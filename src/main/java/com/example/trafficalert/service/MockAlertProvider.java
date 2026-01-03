@@ -11,9 +11,10 @@ public class MockAlertProvider implements AlertProvider {
     public List<AlertEvent> getActiveEvents() {
         // Coordenadas de ejemplo (Madrid centro aprox). Cambia a tu zona.
         return List.of(
-                new AlertEvent("acc-001","ACCIDENT","Accidente","Accidente reportado",40.4169,-3.7036,4),
-                new AlertEvent("jam-002","JAM","Retención","Tráfico denso",40.4200,-3.7050,2),
-                new AlertEvent("clo-003","ROAD_CLOSED","Corte","Carril cerrado",40.4300,-3.7000,3)
+                new AlertEvent(
+                        "mock-1","INCIDENT","Incidencia","Mock","A-1",null,null,null,null,null,null,null,"MOCK",
+                        40.4168,-3.7038,null
+                )
         );
     }
 }
