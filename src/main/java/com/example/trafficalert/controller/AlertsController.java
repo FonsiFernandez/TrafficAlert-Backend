@@ -1,5 +1,6 @@
 package com.example.trafficalert.controller;
 
+import com.example.trafficalert.events.DemoEvents;
 import com.example.trafficalert.model.AlertEvent;
 import com.example.trafficalert.model.AlertHit;
 import com.example.trafficalert.service.AlertProvider;
@@ -31,9 +32,12 @@ public class AlertsController {
             @RequestParam double lat,
             @RequestParam double lon,
             @RequestParam(defaultValue = "2000") @Min(100) @Max(20000) int radiusMeters,
-            @RequestParam(defaultValue = "5") @Min(1) @Max(20) int limit
+            @RequestParam(defaultValue = "5") @Min(1) @Max(20) int limit,
+            @RequestParam(defaultValue = "false") boolean demo
     ) {
-        List<AlertEvent> events = provider.getActiveEvents();
+        List<AlertEvent> events = demo
+                ? DemoEvents.near(lat, lon)
+                : provider.getActiveEvents();
 
         return events.stream()
                 .map(e -> new AlertHit(e, Geo.haversineMeters(lat, lon, e.lat(), e.lon())))
